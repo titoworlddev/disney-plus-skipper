@@ -10,5 +10,13 @@
     "16": "vite.svg",
     "32": "vite.svg",
     "128": "vite.svg"
-  }
+  },
+  "host_permissions": ["https://www.disneyplus.com/*"],
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.disneyplus.com/*"],
+      "js": ["main.js"]
+    }
+  ]
 }
