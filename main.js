@@ -2,8 +2,6 @@
  * @param {String | String[]} texts
  */
 const findElementFromText = texts => {
-  // var xpathExpression =
-  //   "//*[contains(text(), 'SALTAR RESUMEN') or contains(text(), 'SALTAR INTRO')]";
   let xpathExpression = `//*[contains(text(), '${texts}')]`;
 
   if (Array.isArray(texts)) {
@@ -27,9 +25,12 @@ const findElementFromText = texts => {
 };
 
 setInterval(() => {
-  const skipIntroResumeBtn = findElementFromText([
-    'SALTAR RESUMEN',
-    'SALTAR INTRO'
-  ]);
-  if (skipIntroResumeBtn) skipIntroResumeBtn.click();
+  const skipperCheckbox = document.querySelector('#skipper-active');
+  if (skipperCheckbox.checked) {
+    const skipIntroResumeBtn = findElementFromText([
+      'SALTAR RESUMEN',
+      'SALTAR INTRO'
+    ]);
+    if (skipIntroResumeBtn) skipIntroResumeBtn.click();
+  }
 }, 1000);
