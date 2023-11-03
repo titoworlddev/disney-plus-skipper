@@ -1,5 +1,18 @@
-import React from 'react';
+import { useState } from 'react';
 
 export default function App() {
-  return <div>App</div>;
+  const [isSkipperActive, setIsSkipperActive] = useState(true);
+
+  return (
+    <div className="pop-up">
+      <label>
+        Skipper active
+        <input
+          type="checkbox"
+          checked={isSkipperActive}
+          onChange={() => setIsSkipperActive(!isSkipperActive)}
+        />
+      </label>
+    </div>
+  );
 }
