@@ -27,4 +27,4 @@ setInterval(() => {
     'SALTAR INTRO'
   ]);
   if (skipIntroResumeBtn) skipIntroResumeBtn.click();
-}, 1000);
+}, 500);
