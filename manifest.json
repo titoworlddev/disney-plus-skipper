@@ -4,15 +4,17 @@
   "description": "This is an extension that skips the resume and intro of Disney+ videos",
   "version": "1.0",
   "action": {
+    "default_title": "Disney+ Skipper",
     "default_popup": "index.html"
   },
   "icons": {
     "16": "vite.svg",
     "32": "vite.svg",
+    "48": "vite.svg",
     "128": "vite.svg"
   },
-  "host_permissions": ["https://www.disneyplus.com/*"],
   "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://www.disneyplus.com/*"],
   "content_scripts": [
     {
       "matches": ["https://www.disneyplus.com/*"],

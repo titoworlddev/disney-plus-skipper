@@ -1,3 +1,5 @@
+'use strict';
+
 const findElementFromText = texts => {
   let xpathExpression = `//*[contains(text(), '${texts}')]`;
 
