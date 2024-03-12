@@ -26,7 +26,8 @@ const findElementFromText = texts => {
 setInterval(() => {
   const skipIntroResumeBtn = findElementFromText([
     'SALTAR RESUMEN',
-    'SALTAR INTRO'
+    'SALTAR INTRO',
+    'SIGUIENTE EPISODIO'
   ]);
   if (skipIntroResumeBtn) skipIntroResumeBtn.click();
 }, 500);
