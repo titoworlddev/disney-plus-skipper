@@ -5,25 +5,23 @@ function App() {
   const [checked, setChecked] = useState(true);
 
   return (
-    <>
-      <div className="pop-up">
-        <h2>Disney+ Skipper</h2>
+    <div className="pop-up">
+      <h2>Disney+ Skipper</h2>
 
-        <br />
+      <br />
 
-        <label className="checkbox">
-          Activate
-          <input
-            id="skipper-checkbox"
-            type="checkbox"
-            name="checkbox"
-            checked={checked}
-            onChange={() => setChecked(!checked)}
-          />
-          <div className="checkmark"></div>
-        </label>
-      </div>
-    </>
+      <label className="checkbox">
+        Activate
+        <input
+          id="skipper-checkbox"
+          type="checkbox"
+          name="checkbox"
+          checked={checked}
+          onChange={() => setChecked(!checked)}
+        />
+        <div className="checkmark"></div>
+      </label>
+    </div>
   );
 }
 
