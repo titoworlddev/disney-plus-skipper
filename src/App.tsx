@@ -1,8 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { sendMessageToContentScript } from './utils/sendMessageToContentScript';
 
 function App() {
   const [checked, setChecked] = useState(true);
+
+  useEffect(() => {
+    chrome.storage.local.get('skipperIsActive', ({ skipperIsActive }) => {
+      if (chrome.runtime.lastError) {
+        console.error('Error getting search state:', chrome.runtime.lastError);
+      } else {
+        setChecked(skipperIsActive);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (checked) {
+      sendMessageToContentScript('start');
+    } else {
+      sendMessageToContentScript('stop');
+    }
+  }, [checked]);
 
   return (
     <div className="pop-up">

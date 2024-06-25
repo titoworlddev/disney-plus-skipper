@@ -766,10 +766,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/chrome@npm:^0.0.268":
+  version: 0.0.268
+  resolution: "@types/chrome@npm:0.0.268"
+  dependencies:
+    "@types/filesystem": "npm:*"
+    "@types/har-format": "npm:*"
+  checksum: 10c0/2701a43ec00d102302adeb9c8b8ff3f7644c0359fada720e4c9c74f6fa4ac3b14ce231d4fbba743e6e758e9741f738d4d333b005e9a3ebb7fac23c13792bd532
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:1.0.5":
   version: 1.0.5
   resolution: "@types/estree@npm:1.0.5"
   checksum: 10c0/b3b0e334288ddb407c7b3357ca67dbee75ee22db242ca7c56fe27db4e1a31989cb8af48a84dd401deb787fe10cc6b2ab1ee82dc4783be87ededbe3d53c79c70d
+  languageName: node
+  linkType: hard
+
+"@types/filesystem@npm:*":
+  version: 0.0.36
+  resolution: "@types/filesystem@npm:0.0.36"
+  dependencies:
+    "@types/filewriter": "npm:*"
+  checksum: 10c0/3ebec32f0494b0a2612187d148e9f253ff55672c53f566d9a1e6d891eb6e2372df93c252b594b2775bc53e6660c4c37fdb05dc1b26e72b60a31010da8e1f7317
+  languageName: node
+  linkType: hard
+
+"@types/filewriter@npm:*":
+  version: 0.0.33
+  resolution: "@types/filewriter@npm:0.0.33"
+  checksum: 10c0/363ef9a658a961ceae04f52934562e4ebdcdc3a2564dd8544f593d77113c16574938b6ba4fea0bee418c37bda0668c1e03dfedb6adf00d55853f51fb3a59247b
+  languageName: node
+  linkType: hard
+
+"@types/har-format@npm:*":
+  version: 1.2.15
+  resolution: "@types/har-format@npm:1.2.15"
+  checksum: 10c0/43ede55c3947e5cf59561f165930dc2eb3ae983fd162980cdc7274be1e7f528a6f77e65fee9a02a20d91b09bde10bed832b0470724f5c744ef6669015d00564e
   languageName: node
   linkType: hard
 
@@ -1262,6 +1295,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "disney-plus-skipper@workspace:."
   dependencies:
+    "@types/chrome": "npm:^0.0.268"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.13.1"
