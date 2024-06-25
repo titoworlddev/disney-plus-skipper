@@ -10,7 +10,7 @@ function App() {
       if (chrome.runtime.lastError) {
         console.error('Error getting search state:', chrome.runtime.lastError);
       } else {
-        setChecked(skipperIsActive);
+        setChecked(skipperIsActive || true);
       }
     });
   }, []);
@@ -30,7 +30,7 @@ function App() {
       <br />
 
       <label className="checkbox">
-        Activate
+        Activated
         <input
           id="skipper-checkbox"
           type="checkbox"

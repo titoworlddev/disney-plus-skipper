@@ -9,7 +9,6 @@
     rgba(11, 35, 90, 1) 50%,
     rgba(16, 55, 128, 1) 100%
   );
-  border-radius: 8px;
 
   .checkbox {
     display: flex;

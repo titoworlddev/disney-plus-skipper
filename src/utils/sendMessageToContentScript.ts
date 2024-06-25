@@ -1,3 +1,4 @@
+// src/utils/sendMessageToContentScript.js
 export const sendMessageToContentScript = (type: string) => {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     if (tabs.length === 0) {
