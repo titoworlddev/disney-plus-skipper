@@ -31,7 +31,6 @@ export const useForm = (
 
   const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = target;
-    console.log(type);
     setFormState(prevState => ({
       ...prevState,
       [name]: type === 'checkbox' ? checked : value
