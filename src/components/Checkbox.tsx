@@ -4,6 +4,7 @@ interface Props {
   labelText: string;
   id?: string;
   name?: string;
+  disabled?: boolean;
   checked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -12,16 +13,18 @@ export default function Checkbox({
   labelText,
   id,
   name,
+  disabled = false,
   checked,
   onChange
 }: Props) {
   return (
-    <Label className="checkbox">
+    <Label className="checkbox" disabled={disabled}>
       {labelText}
       <input
         id={id}
         type="checkbox"
         name={name}
+        disabled={disabled}
         checked={checked}
         onChange={onChange}
       />
@@ -30,7 +33,7 @@ export default function Checkbox({
   );
 }
 
-const Label = styled.label`
+const Label = styled.label<{ disabled?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,6 +41,7 @@ const Label = styled.label`
   cursor: pointer;
   font-size: 16px;
   user-select: none;
+  color: ${({ disabled }) => (disabled ? 'grey' : '#fff')};
 
   input {
     position: absolute;
@@ -74,7 +78,10 @@ const Label = styled.label`
   }
 
   & input:checked ~ .checkmark {
-    background: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+    background: ${({ disabled }) =>
+      disabled
+        ? 'grey'
+        : 'linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb)'};
     opacity: 0.9;
     transition: all 0.2s ease;
 

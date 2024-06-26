@@ -65,18 +65,21 @@ export default function App() {
         <Checkbox
           labelText="Skip intro"
           name="introCheckbox"
+          disabled={!skipperSwitchChecked}
           checked={introCheckbox}
           onChange={onInputChange}
         />
         <Checkbox
           labelText="Skip resume"
           name="resumeCheckbox"
+          disabled={!skipperSwitchChecked}
           checked={resumeCheckbox}
           onChange={onInputChange}
         />
         <Checkbox
           labelText="Jump to next episode"
           name="jumpCheckbox"
+          disabled={!skipperSwitchChecked}
           checked={jumpCheckbox}
           onChange={onInputChange}
         />
