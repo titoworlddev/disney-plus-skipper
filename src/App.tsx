@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import './App.css';
 import { sendMessageToContentScript } from './utils/sendMessageToContentScript';
 
 function App() {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(
+    JSON.parse(localStorage.getItem('disneyPlusSkipperIsActive') || 'true')
+  );
 
-  useEffect(() => {
-    chrome.storage.local.get('skipperIsActive', ({ skipperIsActive }) => {
-      if (chrome.runtime.lastError) {
-        console.error('Error getting search state:', chrome.runtime.lastError);
-      } else {
-        setChecked(skipperIsActive || true);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (checked) {
+  const handleChecked: ChangeEventHandler<HTMLInputElement> = e => {
+    console.log(e.target.checked);
+    setChecked(e.target.checked);
+    if (e.target.checked) {
       sendMessageToContentScript('start');
     } else {
       sendMessageToContentScript('stop');
     }
-  }, [checked]);
+    localStorage.setItem(
+      'disneyPlusSkipperIsActive',
+      JSON.stringify(e.target.checked)
+    );
+  };
 
   return (
     <div className="pop-up">
@@ -36,7 +34,7 @@ function App() {
           type="checkbox"
           name="checkbox"
           checked={checked}
-          onChange={() => setChecked(!checked)}
+          onChange={handleChecked}
         />
         <div className="checkmark"></div>
       </label>

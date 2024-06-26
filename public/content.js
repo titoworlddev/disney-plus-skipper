@@ -35,13 +35,6 @@ const startSearch = () => {
       ]);
       if (skipIntroResumeBtn) skipIntroResumeBtn.click();
     }, 500);
-    chrome.storage.local.set({ skipperIsActive: true }, () => {
-      if (chrome.runtime.lastError) {
-        console.error('Error setting search state:', chrome.runtime.lastError);
-      } else {
-        console.log('Search state saved as active');
-      }
-    });
     console.log('Search started');
   }
 };
@@ -50,27 +43,9 @@ const stopSearch = () => {
   if (intervalId !== null) {
     clearInterval(intervalId);
     intervalId = null;
-    chrome.storage.local.set({ skipperIsActive: false }, () => {
-      if (chrome.runtime.lastError) {
-        console.error('Error setting search state:', chrome.runtime.lastError);
-      } else {
-        console.log('Search state saved as inactive');
-      }
-    });
     console.log('Search stopped');
   }
 };
-
-// Restablecer el estado al cargar
-chrome.storage.local.get('skipperIsActive', result => {
-  if (chrome.runtime.lastError) {
-    console.error('Error getting search state:', chrome.runtime.lastError);
-  } else {
-    if (result.skipperIsActive) {
-      startSearch();
-    }
-  }
-});
 
 // Escuchar mensajes desde el popup
 chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
