@@ -4,21 +4,31 @@ import { sendMessageToContentScript } from './utils/sendMessageToContentScript';
 import Checkbox from './components/Checkbox';
 import styled from 'styled-components';
 import Switch from './components/Switch';
-import { useForm } from './hooks/useForm';
 import { getMessageType } from './utils/getMessageType';
 
-const initialForm = {
-  introCheckbox: true,
-  resumeCheckbox: true,
-  jumpCheckbox: true
-};
 export default function App() {
   const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
-  const { formState, onInputChange } = useForm(initialForm);
+  const [formState, setFormState] = useState({
+    introCheckbox:
+      JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}')
+        .introCheckbox ?? true,
+    resumeCheckbox:
+      JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}')
+        .resumeCheckbox ?? true,
+    jumpCheckbox:
+      JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}')
+        .jumpCheckbox ?? true
+  });
   const { introCheckbox, resumeCheckbox, jumpCheckbox } = formState;
   const [skipperSwitchChecked, setSkipperSwitchChecked] = useState(
-    JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? 'true')
+    JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}').active ??
+      true
   );
+
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormState({ ...formState, [name]: checked });
+  };
 
   const handleSendMessageToContentScript = (isCkeched: boolean) => {
     if (isCkeched) {
@@ -35,14 +45,26 @@ export default function App() {
   > = e => {
     localStorage.setItem(
       'disneySkipperIsActive',
-      JSON.stringify(e.target.checked)
+      JSON.stringify({ active: e.target.checked, ...formState })
     );
     setSkipperSwitchChecked(e.target.checked);
     handleSendMessageToContentScript(e.target.checked);
   };
 
   const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onInputChange(e);
+    const { name, checked } = e.target;
+    handleOnInputChange(e);
+    const disneySkipperIsActive = JSON.parse(
+      localStorage.getItem('disneySkipperIsActive') ??
+        JSON.stringify({
+          active: skipperSwitchChecked,
+          ...formState
+        })
+    );
+    localStorage.setItem(
+      'disneySkipperIsActive',
+      JSON.stringify({ ...disneySkipperIsActive, [name]: checked })
+    );
   };
 
   useEffect(() => {
@@ -63,39 +85,41 @@ export default function App() {
 
   return (
     <PopUp className="pop-up">
-      <h2>Disney+ Skipper</h2>
+      <h1>Disney+ Skipper</h1>
 
       <hr />
 
-      <Switch
-        labelText="Activated"
-        id="skipperSwitch"
-        checked={skipperSwitchChecked}
-        onChange={handleSkipperSwitchChecked}
-      />
-      <ul className="checkbox-list">
-        <Checkbox
-          labelText="Skip intro"
-          name="introCheckbox"
-          disabled={!skipperSwitchChecked}
-          checked={introCheckbox}
-          onChange={handleSkipperModes}
+      <div className="checkboxes">
+        <Switch
+          labelText="Activated"
+          id="skipperSwitch"
+          checked={skipperSwitchChecked}
+          onChange={handleSkipperSwitchChecked}
         />
-        <Checkbox
-          labelText="Skip resume"
-          name="resumeCheckbox"
-          disabled={!skipperSwitchChecked}
-          checked={resumeCheckbox}
-          onChange={handleSkipperModes}
-        />
-        <Checkbox
-          labelText="Jump to next episode"
-          name="jumpCheckbox"
-          disabled={!skipperSwitchChecked}
-          checked={jumpCheckbox}
-          onChange={handleSkipperModes}
-        />
-      </ul>
+        <ul className="checkbox-list">
+          <Checkbox
+            labelText="Skip intro"
+            name="introCheckbox"
+            disabled={!skipperSwitchChecked}
+            checked={introCheckbox}
+            onChange={handleSkipperModes}
+          />
+          <Checkbox
+            labelText="Skip resume"
+            name="resumeCheckbox"
+            disabled={!skipperSwitchChecked}
+            checked={resumeCheckbox}
+            onChange={handleSkipperModes}
+          />
+          <Checkbox
+            labelText="Jump to next episode"
+            name="jumpCheckbox"
+            disabled={!skipperSwitchChecked}
+            checked={jumpCheckbox}
+            onChange={handleSkipperModes}
+          />
+        </ul>
+      </div>
     </PopUp>
   );
 }
@@ -111,15 +135,25 @@ const PopUp = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   padding: 16px;
   width: 248px;
 
-  .checkbox-list {
-    align-self: flex-end;
+  h1 {
+    font-size: 26px;
+  }
+
+  .checkboxes {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 92.5%;
+
+    .checkbox-list {
+      align-self: flex-end;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 92.5%;
+    }
   }
 `;
