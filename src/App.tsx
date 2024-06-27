@@ -32,9 +32,7 @@ export default function App() {
 
   const handleSendMessageToContentScript = (isCkeched: boolean) => {
     if (isCkeched) {
-      sendMessageToContentScript(
-        getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
-      );
+      sendMessageToContentScript(getMessageType(formState));
     } else {
       sendMessageToContentScript('stop');
     }
@@ -74,13 +72,7 @@ export default function App() {
     if (!shouldExecuteEffect) {
       return;
     }
-    sendMessageToContentScript(
-      getMessageType({
-        introCheckbox,
-        resumeCheckbox,
-        jumpCheckbox
-      })
-    );
+    sendMessageToContentScript(getMessageType(formState));
   }, [formState]);
 
   return (
