@@ -8,43 +8,43 @@ import { useForm } from './hooks/useForm';
 import { getMessageType } from './utils/getMessageType';
 
 const initialForm = {
-  introCheckbox: false,
-  resumeCheckbox: false,
-  jumpCheckbox: false
+  introCheckbox: true,
+  resumeCheckbox: true,
+  jumpCheckbox: true
 };
 export default function App() {
   const { formState, onInputChange } = useForm(initialForm);
   const { introCheckbox, resumeCheckbox, jumpCheckbox } = formState;
   const [skipperSwitchChecked, setSkipperSwitchChecked] = useState(
-    JSON.parse(localStorage.getItem('disneyPlusSkipperIsActive') || 'true')
+    JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? 'true')
   );
 
-  const handleSkipperSwitchChecked: ChangeEventHandler<
-    HTMLInputElement
-  > = e => {
-    setSkipperSwitchChecked(e.target.checked);
-    if (e.target.checked) {
+  const handleSendMessageToContentScript = (isCkeched: boolean) => {
+    if (isCkeched) {
       sendMessageToContentScript(
         getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
       );
     } else {
       sendMessageToContentScript('stop');
     }
+  };
+
+  const handleSkipperSwitchChecked: ChangeEventHandler<
+    HTMLInputElement
+  > = e => {
     localStorage.setItem(
-      'disneyPlusSkipperIsActive',
+      'disneySkipperIsActive',
       JSON.stringify(e.target.checked)
     );
+    setSkipperSwitchChecked(e.target.checked);
+    handleSendMessageToContentScript(e.target.checked);
   };
 
   const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
     onInputChange(e);
-    setTimeout(() => {
-      if (skipperSwitchChecked) {
-        sendMessageToContentScript(
-          getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
-        );
-      }
-    }, 10);
+    sendMessageToContentScript(
+      getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
+    );
   };
 
   return (
