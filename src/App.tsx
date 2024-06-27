@@ -5,6 +5,7 @@ import Checkbox from './components/Checkbox';
 import styled from 'styled-components';
 import Switch from './components/Switch';
 import { useForm } from './hooks/useForm';
+import { getMessageType } from './utils/getMessageType';
 
 const initialForm = {
   introCheckbox: false,
@@ -23,23 +24,9 @@ export default function App() {
   > = e => {
     setSkipperSwitchChecked(e.target.checked);
     if (e.target.checked) {
-      if (!introCheckbox && !resumeCheckbox && !jumpCheckbox) {
-        sendMessageToContentScript('stop');
-      } else if (!introCheckbox && resumeCheckbox && jumpCheckbox) {
-        sendMessageToContentScript('startRJ');
-      } else if (introCheckbox && !resumeCheckbox && jumpCheckbox) {
-        sendMessageToContentScript('startIJ');
-      } else if (introCheckbox && resumeCheckbox && !jumpCheckbox) {
-        sendMessageToContentScript('startIR');
-      } else if (introCheckbox && !resumeCheckbox && !jumpCheckbox) {
-        sendMessageToContentScript('startI');
-      } else if (!introCheckbox && resumeCheckbox && !jumpCheckbox) {
-        sendMessageToContentScript('startR');
-      } else if (!introCheckbox && !resumeCheckbox && jumpCheckbox) {
-        sendMessageToContentScript('startJ');
-      } else {
-        sendMessageToContentScript('start');
-      }
+      sendMessageToContentScript(
+        getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
+      );
     } else {
       sendMessageToContentScript('stop');
     }
@@ -47,6 +34,17 @@ export default function App() {
       'disneyPlusSkipperIsActive',
       JSON.stringify(e.target.checked)
     );
+  };
+
+  const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onInputChange(e);
+    setTimeout(() => {
+      if (skipperSwitchChecked) {
+        sendMessageToContentScript(
+          getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
+        );
+      }
+    }, 10);
   };
 
   return (
@@ -67,21 +65,21 @@ export default function App() {
           name="introCheckbox"
           disabled={!skipperSwitchChecked}
           checked={introCheckbox}
-          onChange={onInputChange}
+          onChange={handleSkipperModes}
         />
         <Checkbox
           labelText="Skip resume"
           name="resumeCheckbox"
           disabled={!skipperSwitchChecked}
           checked={resumeCheckbox}
-          onChange={onInputChange}
+          onChange={handleSkipperModes}
         />
         <Checkbox
           labelText="Jump to next episode"
           name="jumpCheckbox"
           disabled={!skipperSwitchChecked}
           checked={jumpCheckbox}
-          onChange={onInputChange}
+          onChange={handleSkipperModes}
         />
       </ul>
     </PopUp>
