@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import './App.css';
 import { sendMessageToContentScript } from './utils/sendMessageToContentScript';
 import Checkbox from './components/Checkbox';
@@ -13,6 +13,7 @@ const initialForm = {
   jumpCheckbox: true
 };
 export default function App() {
+  const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
   const { formState, onInputChange } = useForm(initialForm);
   const { introCheckbox, resumeCheckbox, jumpCheckbox } = formState;
   const [skipperSwitchChecked, setSkipperSwitchChecked] = useState(
@@ -42,10 +43,23 @@ export default function App() {
 
   const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
     onInputChange(e);
-    sendMessageToContentScript(
-      getMessageType({ introCheckbox, resumeCheckbox, jumpCheckbox })
-    );
   };
+
+  useEffect(() => {
+    setShouldExecuteEffect(true);
+  }, []);
+  useEffect(() => {
+    if (!shouldExecuteEffect) {
+      return;
+    }
+    sendMessageToContentScript(
+      getMessageType({
+        introCheckbox,
+        resumeCheckbox,
+        jumpCheckbox
+      })
+    );
+  }, [formState]);
 
   return (
     <PopUp className="pop-up">
