@@ -45,11 +45,17 @@ const stopSearch = () => {
 // Leer el localStorage y actuar en consecuencia
 const disneySkipperIsActive = localStorage.getItem('disneySkipperIsActive');
 if (disneySkipperIsActive === null) {
-  console.log('Era null');
-  localStorage.setItem('disneySkipperIsActive', 'true');
+  localStorage.setItem(
+    'disneySkipperIsActive',
+    JSON.stringify({
+      active: true,
+      introCheckbox: true,
+      resumeCheckbox: true,
+      jumpCheckbox: true
+    })
+  );
   startSearch(['SALTAR INTRO', 'SALTAR RESUMEN', 'SIGUIENTE EPISODIO']);
-} else if (disneySkipperIsActive === 'true') {
-  console.log('Era true');
+} else if (JSON.parse(disneySkipperIsActive).active === true) {
   startSearch(['SALTAR INTRO', 'SALTAR RESUMEN', 'SIGUIENTE EPISODIO']);
 }
 
