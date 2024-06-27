@@ -10,7 +10,7 @@ interface Props {
 export default function Switch({ labelText, id, checked, onChange }: Props) {
   return (
     <Label className="switch">
-      {labelText}
+      <h2>{labelText}</h2>
       <div className="checkbox">
         <input
           id={id}
@@ -31,6 +31,10 @@ const Label = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  h2 {
+    font-size: 18px;
+  }
 
   .checkbox input[type='checkbox'] {
     visibility: hidden;
