@@ -56,8 +56,8 @@ const Label = styled.label<{ disabled?: boolean }>`
     position: relative;
     top: 0;
     left: 0;
-    height: 1.3em;
-    width: 1.3em;
+    height: 1.16em;
+    width: 1.16em;
     border-radius: 50%;
     background: #ffeded38;
     transition: all 0.2s ease;
@@ -68,9 +68,9 @@ const Label = styled.label<{ disabled?: boolean }>`
       position: absolute;
       display: none;
       left: 0.41em;
-      top: 0.222em;
-      width: 0.25em;
-      height: 0.5em;
+      top: 0.22em;
+      width: 0.2em;
+      height: 0.48em;
       border: solid rgb(255, 255, 255);
       border-width: 0 0.15em 0.15em 0;
       transform: rotate(45deg);
