@@ -57,6 +57,8 @@ if (disneySkipperIsActive === null) {
   startSearch(['SALTAR INTRO', 'SALTAR RESUMEN', 'SIGUIENTE EPISODIO']);
 } else if (JSON.parse(disneySkipperIsActive).active === true) {
   startSearch(['SALTAR INTRO', 'SALTAR RESUMEN', 'SIGUIENTE EPISODIO']);
+} else {
+  stopSearch();
 }
 
 // Escuchar mensajes desde el popup
