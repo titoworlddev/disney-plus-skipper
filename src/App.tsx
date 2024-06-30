@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import Switch from './components/Switch';
 import { getMessageType } from './utils/getMessageType';
 import { saveToLocalStorage } from './utils/saveToLocalStorage';
+import { enLanguage, languages } from './languages';
 
 export default function App() {
+  const [language, setLanguage] = useState(enLanguage);
   const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
   const [formState, setFormState] = useState({
     introCheckbox:
@@ -74,6 +76,20 @@ export default function App() {
     );
   }, [formState]);
 
+  useEffect(() => {
+    console.log('Pidiendo mensaje al content script');
+    // Enviar mensaje al content script para obtener el idioma
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      const tabId = tabs[0].id;
+      chrome.tabs.sendMessage(tabId ?? 0, { type: 'getLanguage' }, response => {
+        console.log({ response });
+        if (response && response.language) {
+          setLanguage(languages[response.language]);
+        }
+      });
+    });
+  }, []);
+
   return (
     <PopUp className="pop-up">
       <h1>Disney+ Skipper</h1>
@@ -82,28 +98,28 @@ export default function App() {
 
       <div className="checkboxes">
         <Switch
-          labelText="Activated"
+          labelText={language.skipperSwitchLabel}
           id="skipperSwitch"
           checked={skipperSwitchChecked}
           onChange={handleSkipperSwitchChecked}
         />
         <ul className="checkbox-list">
           <Checkbox
-            labelText="Skip intro"
+            labelText={language.introCheckboxLabel}
             name="introCheckbox"
             disabled={!skipperSwitchChecked}
             checked={introCheckbox}
             onChange={handleSkipperModes}
           />
           <Checkbox
-            labelText="Skip resume"
+            labelText={language.resumeCheckboxLabel}
             name="resumeCheckbox"
             disabled={!skipperSwitchChecked}
             checked={resumeCheckbox}
             onChange={handleSkipperModes}
           />
           <Checkbox
-            labelText="Jump to next episode"
+            labelText={language.jumpCheckboxLabel}
             name="jumpCheckbox"
             disabled={!skipperSwitchChecked}
             checked={jumpCheckbox}

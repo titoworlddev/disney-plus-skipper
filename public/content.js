@@ -192,3 +192,11 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
       break;
   }
 });
+
+// Escuchar mensajes del popup para cambiar el idioma
+chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
+  if (message.type === 'getLanguage') {
+    const language = getAppLanguage();
+    sendResponse({ language });
+  }
+});
