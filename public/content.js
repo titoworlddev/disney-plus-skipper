@@ -100,7 +100,6 @@ const getMessageType = ({ introCheckbox, resumeCheckbox, jumpCheckbox }) => {
 const startSearch = (textElements = []) => {
   if (intervalId === null) {
     intervalId = setInterval(() => {
-      console.log('Buscando...');
       const skipIntroResumeBtn = findElementFromTexts(textElements);
       if (skipIntroResumeBtn) skipIntroResumeBtn.click();
     }, 500);
