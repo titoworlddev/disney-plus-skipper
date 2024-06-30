@@ -57,19 +57,19 @@ const textElementsMap = {
 // Obtener el texto de los botones segun el typo de mensaje y el idioma actual
 const getSearchButtonsTextsByMessageType = (message = 'start') => {
   const textElements = textElementsMap[getAppLanguage()];
-  if (message.type === 'start') {
+  if (message === 'start') {
     return textElements;
-  } else if (message.type === 'startRJ') {
+  } else if (message === 'startRJ') {
     return [textElements[1], textElements[2]];
-  } else if (message.type === 'startIJ') {
+  } else if (message === 'startIJ') {
     return [textElements[0], textElements.at(-1)];
-  } else if (message.type === 'startIR') {
+  } else if (message === 'startIR') {
     return [textElements[0], textElements[1]];
-  } else if (message.type === 'startI') {
+  } else if (message === 'startI') {
     return textElements[0];
-  } else if (message.type === 'startR') {
+  } else if (message === 'startR') {
     return textElements[1];
-  } else if (message.type === 'startJ') {
+  } else if (message === 'startJ') {
     return textElements.at(-1);
   }
 
