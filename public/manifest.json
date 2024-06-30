@@ -14,7 +14,7 @@
     "48": "logo48.png",
     "128": "logo128.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "scripting"],
   "host_permissions": ["https://www.disneyplus.com/*"],
   "content_scripts": [
     {

@@ -5,6 +5,7 @@ import Checkbox from './components/Checkbox';
 import styled from 'styled-components';
 import Switch from './components/Switch';
 import { getMessageType } from './utils/getMessageType';
+import { saveToLocalStorage } from './utils/saveToLocalStorage';
 
 export default function App() {
   const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
@@ -43,10 +44,7 @@ export default function App() {
   const handleSkipperSwitchChecked: ChangeEventHandler<
     HTMLInputElement
   > = e => {
-    localStorage.setItem(
-      'disneySkipperIsActive',
-      JSON.stringify({ active: e.target.checked, ...formState })
-    );
+    saveToLocalStorage({ active: e.target.checked, ...formState });
     setSkipperSwitchChecked(e.target.checked);
     handleSendMessageToContentScript(e.target.checked);
   };
@@ -61,10 +59,7 @@ export default function App() {
           ...formState
         })
     );
-    localStorage.setItem(
-      'disneySkipperIsActive',
-      JSON.stringify({ ...disneySkipperIsActive, [name]: checked })
-    );
+    saveToLocalStorage({ ...disneySkipperIsActive, [name]: checked });
   };
 
   useEffect(() => {

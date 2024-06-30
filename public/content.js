@@ -142,100 +142,51 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
     case 'start':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: true,
-        resumeCheckbox: true,
-        jumpCheckbox: true
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search started' });
       break;
     case 'startRJ':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: false,
-        resumeCheckbox: true,
-        jumpCheckbox: true
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search RJ started' });
       break;
     case 'startIJ':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: true,
-        resumeCheckbox: false,
-        jumpCheckbox: true
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search IJ started' });
       break;
     case 'startIR':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: true,
-        resumeCheckbox: true,
-        jumpCheckbox: false
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search IR started' });
       break;
     case 'startI':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: true,
-        resumeCheckbox: false,
-        jumpCheckbox: false
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search I started' });
       break;
     case 'startR':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: false,
-        resumeCheckbox: true,
-        jumpCheckbox: false
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search R started' });
       break;
     case 'startJ':
       if (intervalId !== null) clearInterval(intervalId);
       intervalId = null;
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: false,
-        resumeCheckbox: false,
-        jumpCheckbox: true
-      });
       startSearch(getSearchButtonsTextsByMessageType(message.type));
       sendResponse({ status: 'Search J started' });
       break;
     case 'stopIRJ':
       stopSearch();
-      saveToLocalStorage({
-        active: true,
-        introCheckbox: false,
-        resumeCheckbox: false,
-        jumpCheckbox: false
-      });
       sendResponse({ status: 'Search stopped' });
       break;
     case 'stop':
       stopSearch();
-      saveToLocalStorage({ active: false });
       sendResponse({ status: 'Search stopped' });
       break;
     default:

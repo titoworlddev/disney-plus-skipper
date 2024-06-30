@@ -31,6 +31,7 @@ const Label = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
   h2 {
     font-size: 18px;
