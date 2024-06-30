@@ -1,5 +1,23 @@
 ## Lenguajes que faltan
 
-![Lenguages1](languajes.png)
-![Lenguages2](languajes2.png)
-![Lenguages3](languajes3.png)
+- Čeština - cs-CZ ✅
+- Dansk - da-DK ✅
+- Deutsch - de-DE ✅
+- Ελληνικά - el-GR ✅
+- English (US) - en-US ✅
+- Español - es-ES ✅
+- Suomi - fi-FI ✅
+- Français - fr-FR ✅
+- Magyar - hu-HU ✅
+- Italiano - it-IT ✅
+- 日本語 - ja-JP ✅
+- 한국어 - ko-KR ✅
+- Nederlands - nl-NL ✅
+- Norsk - no-NO ✅
+- Polski - pl-PL ✅
+- Português - pt-PT ✅
+- Română - ro-RO ✅
+- Slovenčina - sk-SK ✅
+- Svenska - sv-SE ✅
+- Türkçe - tr-TR ✅
+- 中文 (简体) - zh-CN ✅

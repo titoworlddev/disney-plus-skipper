@@ -77,7 +77,6 @@ export default function App() {
   }, [formState]);
 
   useEffect(() => {
-    console.log('Pidiendo mensaje al content script');
     // Enviar mensaje al content script para obtener el idioma
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       const tabId = tabs[0].id;

@@ -48,10 +48,28 @@ const getAppLanguage = () => {
 };
 
 const textElementsMap = {
+  cs: ['PŘESKOČIT ÚVOD', 'PŘESKOČIT REKAPITULACI', 'DALŠÍ DÍL'],
+  da: ['SPRING INTRO OVER', 'SPRING OVER RESUMÉ', 'NÆSTE EPISODE'],
   de: ['INTRO ÜBERSPRINGEN', 'ZUSAMMENFASSUNG ÜBERSPRINGEN', 'NÄCHSTE FOLGE'],
   en: ['SKIP INTRO', 'SKIP RECAP', 'NEXT EPISODE'],
   es: ['SALTAR INTRO', 'SALTAR RESUMEN', 'SIGUIENTE EPISODIO'],
-  fr: ["INGORER L'INTRO", 'IGNORER LE RÉCAP', 'ÉPISODE SUIVANT']
+  fr: ["IGNORER L'INTRO", 'IGNORER LE RÉCAP', 'ÉPISODE SUIVANT'],
+  it: ['SALTA INTRO', 'SALTA RIEPILOGO', 'PROSSIMO EPISODIO'],
+  hu: ['FŐCÍM KIHAGYÁSA', 'ELŐZMÉNYEK KIHAGYÁSA', 'KÖVETKEZŐ RÉSZ'],
+  nl: ['INTRO OVERSLAAN', 'SAMENVATTING OVERSLAAN', 'VOLGENDE AFLEVERING'],
+  no: ['HOPP OVER INTRO', 'HOPP OVER SAMMENDRAG', 'NESTE EPISODE'],
+  pl: ['POMIŃ CZOŁÓWKĘ', 'POMIŃ PODSUMOWANIE', 'NASTĘPNY ODCINEK'],
+  pt: ['SALTAR INTRODUÇÃO', 'SALTAR RESUMO', 'PRÓXIMO EPISÓDIO'],
+
+  ro: ['SARI PESTE INTRODUCERE', 'SARI PESTE RECAPITULARE', 'URMĂTORUL EPISOD'],
+  sk: ['PRESKOČIŤ ÚVOD', 'PRESKOČIŤ REKAPITULÁCIU', 'ĎALŠIA EPIZÓDA'],
+  fi: ['OHITA INTRO', 'OHITA YHTEENVETO', 'SEURAAVA JAKSO'],
+  sv: ['HOPPA ÖVER INTRO', 'HOPPA ÖVER SAMMANFATTNING', 'NÄSTA AVSNITT'],
+  tr: ['GİRİŞİ ATLA', 'ÖZETİ ATLA', 'SONRAKİ BÖLÜM'],
+  el: ['ΠΑΡΑΛΕΙΨΗ ΕΙΣΑΓΩΓΗΣ', 'ΠΑΡΑΛΕΙΨΗ ΑΝΑΚΕΦΑΛΑΙΩΣΗΣ', 'ΕΠΟΜΕΝΟ ΕΠΕΙΣΟΔΙΟ'],
+  ko: ['인트로 건너뛰기', '요약 건너뛰기', '다음 에피소드'],
+  zh: ['跳过介绍', '跳过回顾', '下一集'],
+  ja: ['イントロをスキップ', 'リキャップをスキップ', '次のエピソード']
 };
 
 // Obtener el texto de los botones segun el typo de mensaje y el idioma actual

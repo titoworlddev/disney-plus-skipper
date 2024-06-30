@@ -1,14 +1,48 @@
 import {
   AppLanguages,
+  csLanguage,
+  daLanguage,
   deLanguage,
+  elLanguage,
   enLanguage,
   esLanguage,
-  frLanguage
+  fiLanguage,
+  frLanguage,
+  huLanguage,
+  itLanguage,
+  jaLanguage,
+  koLanguage,
+  nlLanguage,
+  noLanguage,
+  plLanguage,
+  ptLanguage,
+  roLanguage,
+  skLanguage,
+  svLanguage,
+  trLanguage,
+  zhLanguage
 } from './';
 
 export const languages: AppLanguages = {
+  cs: csLanguage,
+  da: daLanguage,
   de: deLanguage,
   en: enLanguage,
   es: esLanguage,
-  fr: frLanguage
+  fr: frLanguage,
+  it: itLanguage,
+  hu: huLanguage,
+  nl: nlLanguage,
+  no: noLanguage,
+  pl: plLanguage,
+  pt: ptLanguage,
+  ro: roLanguage,
+  sk: skLanguage,
+  fi: fiLanguage,
+  sv: svLanguage,
+  tr: trLanguage,
+  el: elLanguage,
+  ko: koLanguage,
+  zh: zhLanguage,
+  ja: jaLanguage
 };
