@@ -1,30 +1,80 @@
-# React + TypeScript + Vite
+# Disney+ Skipper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Disney+ Skipper Logo](public\logo128.png)
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Disney+ Skipper** is a Chrome extension designed to enhance your Disney+ experience. With this extension, you can automatically skip intros, recaps, and jump to the next episode without lifting a finger.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Skip Intros**: Automatically skip the intros of your favorite series.
+- **Skip Recaps**: Skip recaps and jump directly to the new content.
+- **Jump to Next Episode**: Automatically advance to the next episode when one ends.
+- **User-Friendly Interface**: Easily configure which functions you want to activate.
 
-- Configure the top-level `parserOptions` property like this:
+## Screenshots
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+![Screenshot 1](screenshot1.png)
+_Extension user interface_
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+![Screenshot 2](screenshot2.png)
+_Options configuration_
+
+## Installation
+
+1. Clone this repository or download the ZIP files.
+   ```sh
+   git clone https://github.com/your_username/disney-plus-skipper.git
+   ```
+2. Open Chrome and navigate to `chrome://extensions/`.
+3. Enable "Developer mode" in the top right corner.
+4. Click "Load unpacked" and select the project folder you cloned or unzipped.
+
+## Usage
+
+1. Open Disney+ and play any series or movie.
+2. The extension will automatically activate and start skipping intros, recaps, and jumping to the next episode according to your settings.
+
+## Configuration
+
+1. Click on the extension icon in the Chrome toolbar.
+2. Adjust the settings according to your preferences:
+   - Enable/Disable skip intros
+   - Enable/Disable skip recaps
+   - Enable/Disable jump to next episode
+
+## Permissions
+
+The extension requires the following permissions to function correctly:
+
+- **activeTab**: Allows interaction with the active tab.
+- **scripting**: Allows executing scripts on the Disney+ web page.
+- **host_permissions**: `https://www.disneyplus.com/*` to limit the extension to only Disney+ pages.
+
+## Contributions
+
+Contributions are welcome! If you want to improve this extension or add new features, please follow these steps:
+
+1. Fork the project.
+2. Create a new branch (`git checkout -b feature/new-feature`).
+3. Make the necessary changes and commit them (`git commit -m 'Add new feature'`).
+4. Push your changes (`git push origin feature/new-feature`).
+5. Open a Pull Request.
+
+## Credits
+
+- **Lead Developer**: [Cristian Arias](https://github.com/titoworlddev)
+<!-- - **Contributors**: [List of contributors] -->
+
+## License
+
+This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
+
+## Contact
+
+For any questions or comments, please contact [your_email@example.com](mailto:your_email@example.com).
+
+---
+
+Thank you for using Disney+ Skipper! Enjoy your series and movies without interruptions.
