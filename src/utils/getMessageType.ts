@@ -1,16 +1,20 @@
 interface GetMessageTypeProps {
+  active: boolean;
   introCheckbox: boolean;
   resumeCheckbox: boolean;
   jumpCheckbox: boolean;
 }
 
 export const getMessageType = ({
+  active,
   introCheckbox,
   resumeCheckbox,
   jumpCheckbox
 }: GetMessageTypeProps) => {
-  if (!introCheckbox && !resumeCheckbox && !jumpCheckbox) {
+  if (!active) {
     return 'stop';
+  } else if (!introCheckbox && !resumeCheckbox && !jumpCheckbox) {
+    return 'stopIRJ';
   } else if (!introCheckbox && resumeCheckbox && jumpCheckbox) {
     return 'startRJ';
   } else if (introCheckbox && !resumeCheckbox && jumpCheckbox) {

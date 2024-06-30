@@ -30,9 +30,11 @@ export default function App() {
     setFormState({ ...formState, [name]: checked });
   };
 
-  const handleSendMessageToContentScript = (isCkeched: boolean) => {
-    if (isCkeched) {
-      sendMessageToContentScript(getMessageType(formState));
+  const handleSendMessageToContentScript = (isChecked: boolean) => {
+    if (isChecked) {
+      sendMessageToContentScript(
+        getMessageType({ active: isChecked, ...formState })
+      );
     } else {
       sendMessageToContentScript('stop');
     }
@@ -72,7 +74,9 @@ export default function App() {
     if (!shouldExecuteEffect) {
       return;
     }
-    sendMessageToContentScript(getMessageType(formState));
+    sendMessageToContentScript(
+      getMessageType({ active: skipperSwitchChecked, ...formState })
+    );
   }, [formState]);
 
   return (
