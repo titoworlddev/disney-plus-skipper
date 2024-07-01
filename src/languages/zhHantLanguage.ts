@@ -1,8 +1,8 @@
 import { AppLanguage } from './language.types';
 
-export const zhLanguage: AppLanguage = {
-  introCheckboxLabel: '跳过介绍',
+export const zhHantLanguage: AppLanguage = {
+  introCheckboxLabel: '跳過介紹',
   jumpCheckboxLabel: '跳到下一集',
-  resumeCheckboxLabel: '跳过回顾',
+  resumeCheckboxLabel: '跳過回顧',
   skipperSwitchLabel: '已激活'
 };

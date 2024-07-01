@@ -1,5 +1,4 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
-import './App.css';
 import { sendMessageToContentScript } from './utils/sendMessageToContentScript';
 import Checkbox from './components/Checkbox';
 import styled from 'styled-components';
@@ -143,7 +142,7 @@ const PopUp = styled.div`
   flex-direction: column;
   gap: 20px;
   padding: 16px;
-  width: 248px;
+  width: 296px;
 
   h1 {
     font-size: 26px;
