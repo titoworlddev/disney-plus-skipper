@@ -80,7 +80,6 @@ export default function App() {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       const tabId = tabs[0].id;
       chrome.tabs.sendMessage(tabId ?? 0, { type: 'getLanguage' }, response => {
-        console.log({ response });
         if (response && response.language) {
           setLanguage(languages[response.language]);
         }
