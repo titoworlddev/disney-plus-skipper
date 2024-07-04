@@ -1,78 +1,19 @@
-import { ChangeEventHandler, useEffect, useState } from 'react';
-import { sendMessageToContentScript } from './utils/sendMessageToContentScript';
 import Checkbox from './components/Checkbox';
 import styled from 'styled-components';
 import Switch from './components/Switch';
-import { getMessageType } from './utils/getMessageType';
-import { saveToLocalStorage } from './utils/saveToLocalStorage';
 import { useLanguage } from './hooks/useLanguage';
-
-const initialFormState = JSON.parse(
-  localStorage.getItem('disneySkipperIsActive') ??
-    JSON.stringify({
-      active: true,
-      introCheckbox: true,
-      resumeCheckbox: true,
-      jumpCheckbox: true
-    })
-);
+import { useForm } from './hooks/useForm';
 
 export default function App() {
   const { language } = useLanguage();
-  const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
-  const [formState, setFormState] = useState(initialFormState);
-  const { introCheckbox, resumeCheckbox, jumpCheckbox } = formState;
-  const [skipperSwitchChecked, setSkipperSwitchChecked] = useState(
-    initialFormState.active
-  );
-
-  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormState({ ...formState, [name]: checked });
-  };
-
-  const handleSendMessageToContentScript = (isChecked: boolean) => {
-    if (isChecked) {
-      sendMessageToContentScript(
-        getMessageType({ active: isChecked, ...formState })
-      );
-    } else {
-      sendMessageToContentScript('stop');
-    }
-  };
-
-  const handleSkipperSwitchChecked: ChangeEventHandler<
-    HTMLInputElement
-  > = e => {
-    saveToLocalStorage({ active: e.target.checked, ...formState });
-    setSkipperSwitchChecked(e.target.checked);
-    handleSendMessageToContentScript(e.target.checked);
-  };
-
-  const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    handleOnInputChange(e);
-    const disneySkipperIsActive = JSON.parse(
-      localStorage.getItem('disneySkipperIsActive') ??
-        JSON.stringify({
-          active: skipperSwitchChecked,
-          ...formState
-        })
-    );
-    saveToLocalStorage({ ...disneySkipperIsActive, [name]: checked });
-  };
-
-  useEffect(() => {
-    setShouldExecuteEffect(true);
-  }, []);
-  useEffect(() => {
-    if (!shouldExecuteEffect) {
-      return;
-    }
-    sendMessageToContentScript(
-      getMessageType({ active: skipperSwitchChecked, ...formState })
-    );
-  }, [formState]);
+  const {
+    introCheckbox,
+    resumeCheckbox,
+    jumpCheckbox,
+    skipperSwitchChecked,
+    handleSkipperSwitchChecked,
+    handleSkipperModes
+  } = useForm();
 
   return (
     <PopUp className="pop-up">

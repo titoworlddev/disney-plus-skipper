@@ -1,64 +1,83 @@
-import { useEffect, useMemo, useState, ChangeEvent } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
+import { sendMessageToContentScript } from '../utils/sendMessageToContentScript';
+import { getMessageType } from '../utils/getMessageType';
+import { saveToLocalStorage } from '../utils/saveToLocalStorage';
 
-// Definiendo tipos para el formulario y las validaciones
-type FormState = { [key: string]: any };
-type ValidationFunction = (value: any) => boolean;
-type FormValidations = {
-  [key: string]: [ValidationFunction, string];
-};
+const initialFormState = JSON.parse(
+  localStorage.getItem('disneySkipperIsActive') ??
+    JSON.stringify({
+      active: true,
+      introCheckbox: true,
+      resumeCheckbox: true,
+      jumpCheckbox: true
+    })
+);
 
-export const useForm = (
-  initialForm: FormState = {},
-  formValidations: FormValidations = {}
-) => {
-  const [formState, setFormState] = useState<FormState>(initialForm);
-  const [formValidation, setFormValidation] = useState<{
-    [key: string]: string | null;
-  }>({});
-
-  useEffect(() => {
-    createValidators();
-  }, [formState]);
-
-  useEffect(() => {
-    setFormState(initialForm);
-  }, [initialForm]);
-
-  const isFormValid = useMemo(
-    () => Object.values(formValidation).every(value => value === null),
-    [formValidation]
+export const useForm = () => {
+  const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
+  const [formState, setFormState] = useState(initialFormState);
+  const { introCheckbox, resumeCheckbox, jumpCheckbox } = formState;
+  const [skipperSwitchChecked, setSkipperSwitchChecked] = useState(
+    initialFormState.active
   );
 
-  const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, checked, type } = target;
-    setFormState(prevState => ({
-      ...prevState,
-      [name]: type === 'checkbox' ? checked : value
-    }));
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormState({ ...formState, [name]: checked });
   };
 
-  const onResetForm = () => {
-    setFormState(initialForm);
-  };
-
-  const createValidators = () => {
-    const formCheckedValues: { [key: string]: string | null } = {};
-    for (const formField in formValidations) {
-      const [fn, errorMessage] = formValidations[formField];
-      formCheckedValues[`${formField}Valid`] = fn(formState[formField])
-        ? null
-        : errorMessage;
+  const handleSendMessageToContentScript = (isChecked: boolean) => {
+    if (isChecked) {
+      sendMessageToContentScript(
+        getMessageType({ active: isChecked, ...formState })
+      );
+    } else {
+      sendMessageToContentScript('stop');
     }
-    setFormValidation(formCheckedValues);
   };
+
+  const handleSkipperSwitchChecked: ChangeEventHandler<
+    HTMLInputElement
+  > = e => {
+    saveToLocalStorage({ active: e.target.checked, ...formState });
+    setSkipperSwitchChecked(e.target.checked);
+    handleSendMessageToContentScript(e.target.checked);
+  };
+
+  const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    handleOnInputChange(e);
+    const disneySkipperIsActive = JSON.parse(
+      localStorage.getItem('disneySkipperIsActive') ??
+        JSON.stringify({
+          active: skipperSwitchChecked,
+          ...formState
+        })
+    );
+    saveToLocalStorage({ ...disneySkipperIsActive, [name]: checked });
+  };
+
+  useEffect(() => {
+    setShouldExecuteEffect(true);
+  }, []);
+  useEffect(() => {
+    if (!shouldExecuteEffect) {
+      return;
+    }
+    sendMessageToContentScript(
+      getMessageType({ active: skipperSwitchChecked, ...formState })
+    );
+  }, [formState]);
 
   return {
-    ...formState,
-    formState,
-    onInputChange,
-    onResetForm,
-    ...formValidation,
-    formValidation,
-    isFormValid
+    // Propiedades
+    introCheckbox,
+    resumeCheckbox,
+    jumpCheckbox,
+    skipperSwitchChecked,
+
+    // Metodos
+    handleSkipperSwitchChecked,
+    handleSkipperModes
   };
 };
