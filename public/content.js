@@ -74,11 +74,17 @@
 
   // Detectar el idioma del usuario
   const getAppLanguage = () => {
-    const lang =
-      document.querySelector('html').lang ||
-      navigator.language ||
-      navigator.languages[0];
-    return supportedLanguages.includes(lang) ? lang : 'en';
+    let lang = document.querySelector('html').lang || navigator.language;
+    if (!supportedLanguages.includes(lang)) {
+      lang = 'en';
+      for (const l of navigator.languages) {
+        if (supportedLanguages.includes(l)) {
+          lang = l;
+          break;
+        }
+      }
+    }
+    return lang;
   };
 
   const textElementsMap = {

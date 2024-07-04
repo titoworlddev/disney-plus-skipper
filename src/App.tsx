@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import Switch from './components/Switch';
 import { getMessageType } from './utils/getMessageType';
 import { saveToLocalStorage } from './utils/saveToLocalStorage';
-import { enLanguage, languages } from './languages';
+import { useLanguage } from './hooks/useLanguage';
 
 export default function App() {
-  const [language, setLanguage] = useState(enLanguage);
+  const { language } = useLanguage();
   const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
   const [formState, setFormState] = useState({
     introCheckbox:
@@ -74,18 +74,6 @@ export default function App() {
       getMessageType({ active: skipperSwitchChecked, ...formState })
     );
   }, [formState]);
-
-  useEffect(() => {
-    // Enviar mensaje al content script para obtener el idioma
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-      const tabId = tabs[0].id;
-      chrome.tabs.sendMessage(tabId ?? 0, { type: 'getLanguage' }, response => {
-        if (response && response.language) {
-          setLanguage(languages[response.language]);
-        }
-      });
-    });
-  }, []);
 
   return (
     <PopUp className="pop-up">
