@@ -74,7 +74,10 @@
 
   // Detectar el idioma del usuario
   const getAppLanguage = () => {
-    const lang = document.querySelector('html').lang;
+    const lang =
+      document.querySelector('html').lang ||
+      navigator.language ||
+      navigator.languages[0];
     return supportedLanguages.includes(lang) ? lang : 'en';
   };
 
