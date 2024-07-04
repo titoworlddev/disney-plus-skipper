@@ -7,24 +7,23 @@ import { getMessageType } from './utils/getMessageType';
 import { saveToLocalStorage } from './utils/saveToLocalStorage';
 import { useLanguage } from './hooks/useLanguage';
 
+const initialFormState = JSON.parse(
+  localStorage.getItem('disneySkipperIsActive') ??
+    JSON.stringify({
+      active: true,
+      introCheckbox: true,
+      resumeCheckbox: true,
+      jumpCheckbox: true
+    })
+);
+
 export default function App() {
   const { language } = useLanguage();
   const [shouldExecuteEffect, setShouldExecuteEffect] = useState(false);
-  const [formState, setFormState] = useState({
-    introCheckbox:
-      JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}')
-        .introCheckbox ?? true,
-    resumeCheckbox:
-      JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}')
-        .resumeCheckbox ?? true,
-    jumpCheckbox:
-      JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}')
-        .jumpCheckbox ?? true
-  });
+  const [formState, setFormState] = useState(initialFormState);
   const { introCheckbox, resumeCheckbox, jumpCheckbox } = formState;
   const [skipperSwitchChecked, setSkipperSwitchChecked] = useState(
-    JSON.parse(localStorage.getItem('disneySkipperIsActive') ?? '{}').active ??
-      true
+    initialFormState.active
   );
 
   const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
