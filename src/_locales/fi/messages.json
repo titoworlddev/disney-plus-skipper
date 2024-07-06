@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Disney+ AutoSkip",
+    "description": "The name of the extension"
+  },
+  "appDescription": {
+    "message": "Tämä on laajennus, joka ohittaa Disney+ videoiden yhteenvedon ja introt ja siirtyy seuraavaan jaksoon",
+    "description": "The description of the extension"
+  }
+}

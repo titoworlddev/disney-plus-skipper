@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Disney+ AutoSkip",
+    "description": "The name of the extension"
+  },
+  "appDescription": {
+    "message": "這是一個擴充功能，它會跳過Disney+視頻的摘要和介紹，並跳到下一集",
+    "description": "The description of the extension"
+  }
+}

@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Disney+ AutoSkip",
-  "description": "This is an extension that skips the resume and intro of Disney+ videos and jumps to the next episode",
-  "version": "1.0.6",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.1.0",
   "action": {
-    "default_title": "Disney+ AutoSkip",
+    "default_title": "__MSG_appName__",
     "default_popup": "index.html",
     "default_icon": "logo128.png"
   },
@@ -21,5 +21,6 @@
       "matches": ["https://www.disneyplus.com/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "default_locale": "en"
 }

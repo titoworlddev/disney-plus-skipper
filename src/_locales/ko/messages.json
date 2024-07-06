@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Disney+ AutoSkip",
+    "description": "The name of the extension"
+  },
+  "appDescription": {
+    "message": "이 확장 프로그램은 Disney+ 동영상의 요약 및 인트로를 건너뛰고 다음 에피소드로 이동합니다",
+    "description": "The description of the extension"
+  }
+}

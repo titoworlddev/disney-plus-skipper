@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Disney+ AutoSkip",
+    "description": "The name of the extension"
+  },
+  "appDescription": {
+    "message": "Aceasta este o extensie care sare peste rezumatul și introducerea videoclipurilor Disney+ și trece la următorul episod",
+    "description": "The description of the extension"
+  }
+}
