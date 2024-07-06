@@ -1,10 +1,10 @@
-# Disney+ Skipper
+# Disney+ AutoSkip
 
-![Disney+ Skipper Logo](public\logo128.png)
+![Disney+ AutoSkip Logo](public\logo128.png)
 
 ## Description
 
-**Disney+ Skipper** is a Chrome extension designed to enhance your Disney+ experience. With this extension, you can automatically skip intros, recaps, and jump to the next episode without lifting a finger.
+**Disney+ AutoSkip** is a Chrome extension designed to enhance your Disney+ experience. With this extension, you can automatically skip intros, recaps, and jump to the next episode without lifting a finger.
 
 ## Features
 
@@ -77,4 +77,4 @@ For any questions or comments, please contact [your_email@example.com](mailto:yo
 
 ---
 
-Thank you for using Disney+ Skipper! Enjoy your series and movies without interruptions.
+Thank you for using Disney+ AutoSkip! Enjoy your series and movies without interruptions.

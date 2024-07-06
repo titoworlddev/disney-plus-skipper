@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Disney+ Skipper",
-  "description": "This is an extension that skips the resume and intro of Disney+ videos",
+  "name": "Disney+ AutoSkip",
+  "description": "This is an extension that skips the resume and intro of Disney+ videos and jumps to the next episode",
   "version": "1.0.6",
   "action": {
-    "default_title": "Disney+ Skipper",
+    "default_title": "Disney+ AutoSkip",
     "default_popup": "index.html",
     "default_icon": "logo128.png"
   },

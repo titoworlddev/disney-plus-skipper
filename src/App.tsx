@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <PopUp className="pop-up">
-      <h1>Disney+ Skipper</h1>
+      <h1>Disney+ AutoSkip</h1>
 
       <hr />
 
