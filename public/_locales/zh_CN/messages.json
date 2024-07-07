@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "appDescription": {
-    "message": "This is an extension that skips the resume and intro of Disney+ videos and jumps to the next episode",
+    "message": "这是一个扩展程序，它跳过Disney+视频的简报和介绍，并跳到下一集",
     "description": "The description of the extension"
   }
 }
