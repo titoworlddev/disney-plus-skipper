@@ -20,25 +20,27 @@ export const saveToLocalStorage = (newStorageData: GetMessageTypeProps) => {
   );
 
   // Inyectar y guardar en el localStorage de la página activa
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    const activeTab = tabs[0];
+  if (chrome.tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      const activeTab = tabs[0];
 
-    chrome.scripting.executeScript({
-      target: { tabId: activeTab.id ?? 0 },
-      func: data => {
-        const disneySkipperIsActive = JSON.parse(
-          localStorage.getItem('disneySkipperIsActive') ?? '{}'
-        );
+      chrome.scripting.executeScript({
+        target: { tabId: activeTab.id ?? 0 },
+        func: data => {
+          const disneySkipperIsActive = JSON.parse(
+            localStorage.getItem('disneySkipperIsActive') ?? '{}'
+          );
 
-        localStorage.setItem(
-          'disneySkipperIsActive',
-          JSON.stringify({
-            ...disneySkipperIsActive,
-            ...data
-          })
-        );
-      },
-      args: [newStorageData]
+          localStorage.setItem(
+            'disneySkipperIsActive',
+            JSON.stringify({
+              ...disneySkipperIsActive,
+              ...data
+            })
+          );
+        },
+        args: [newStorageData]
+      });
     });
-  });
+  }
 };

@@ -39,7 +39,7 @@ export const useForm = () => {
   const handleSkipperSwitchChecked: ChangeEventHandler<
     HTMLInputElement
   > = e => {
-    saveToLocalStorage({ active: e.target.checked, ...formState });
+    saveToLocalStorage({ ...formState, active: e.target.checked });
     setSkipperSwitchChecked(e.target.checked);
     handleSendMessageToContentScript(e.target.checked);
   };
