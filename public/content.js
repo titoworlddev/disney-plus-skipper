@@ -164,7 +164,13 @@
     if (intervalId === null) {
       intervalId = setInterval(() => {
         const skipIntroResumeBtn = findElementFromTexts(textElements);
-        if (skipIntroResumeBtn) skipIntroResumeBtn.click();
+        if (skipIntroResumeBtn) {
+          skipIntroResumeBtn.click();
+          stopSearch();
+          setTimeout(() => {
+            startSearch(textElements);
+          }, 1000 * 6);
+        }
       }, 500);
       console.log('Search started');
     }
