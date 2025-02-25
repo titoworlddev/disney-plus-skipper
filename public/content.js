@@ -3,6 +3,7 @@
   let intervalId = null;
   const disneySkipperIsActive = () =>
     JSON.parse(localStorage.getItem('disneySkipperIsActive'));
+  let lastSkipButtonText = '';
 
   /**
    * Guardar en el localStorage
@@ -160,16 +161,37 @@
     }
   };
 
+  // const fullScreenVideo = () => {
+  //   const video = document.getElementById('hudson-wrapper');
+  //   // const video = document.getElementById('hivePlayer');
+  //   console.log({ video });
+  //   if (video.requestFullscreen) {
+  //     video.requestFullscreen();
+  //   } else if (video.mozRequestFullScreen) {
+  //     // Firefox
+  //     video.mozRequestFullScreen();
+  //   } else if (video.webkitRequestFullscreen) {
+  //     // Chrome, Safari y Opera
+  //     video.webkitRequestFullscreen();
+  //   } else if (video.msRequestFullscreen) {
+  //     // Internet Explorer/Edge
+  //     video.msRequestFullscreen();
+  //   }
+  // };
+
   const startSearch = (textElements = []) => {
     if (intervalId === null) {
       intervalId = setInterval(() => {
         const skipIntroResumeBtn = findElementFromTexts(textElements);
-        if (skipIntroResumeBtn) {
+        const buttonText = skipIntroResumeBtn?.textContent;
+        if (skipIntroResumeBtn && lastSkipButtonText !== buttonText) {
+          lastSkipButtonText = buttonText;
           skipIntroResumeBtn.click();
-          stopSearch();
+          // TODO: Prueba a ver si se puede poner tambien otro interval que vaya mirando si el video esta y esta en fullscreen y si no lo esta lo pones
+          // fullScreenVideo();
           setTimeout(() => {
-            startSearch(textElements);
-          }, 1000 * 6);
+            lastSkipButtonText = '';
+          }, 1000 * 8);
         }
       }, 500);
       console.log('Search started');
