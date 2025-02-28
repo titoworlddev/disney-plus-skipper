@@ -28,9 +28,8 @@ export const useForm = () => {
 
   const handleSendMessageToContentScript = (isChecked: boolean) => {
     if (isChecked) {
-      sendMessageToContentScript(
-        getMessageType({ active: isChecked, ...formState })
-      );
+      const messageType = getMessageType({ ...formState, active: isChecked });
+      sendMessageToContentScript(messageType);
     } else {
       sendMessageToContentScript('stop');
     }
@@ -41,17 +40,19 @@ export const useForm = () => {
   > = e => {
     saveToLocalStorage({ ...formState, active: e.target.checked });
     setSkipperSwitchChecked(e.target.checked);
+    console.error(e.target.checked);
     handleSendMessageToContentScript(e.target.checked);
   };
 
   const handleSkipperModes = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
+    console.error({ name, checked });
     handleOnInputChange(e);
     const disneySkipperIsActive = JSON.parse(
       localStorage.getItem('disneySkipperIsActive') ??
         JSON.stringify({
-          active: skipperSwitchChecked,
-          ...formState
+          ...formState,
+          active: skipperSwitchChecked
         })
     );
     saveToLocalStorage({ ...disneySkipperIsActive, [name]: checked });
@@ -65,7 +66,7 @@ export const useForm = () => {
       return;
     }
     sendMessageToContentScript(
-      getMessageType({ active: skipperSwitchChecked, ...formState })
+      getMessageType({ ...formState, active: skipperSwitchChecked })
     );
   }, [formState]);
 

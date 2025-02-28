@@ -28,6 +28,7 @@ export default function App() {
           checked={skipperSwitchChecked}
           onChange={handleSkipperSwitchChecked}
         />
+
         <ul className="checkbox-list">
           <Checkbox
             labelText={language.introCheckboxLabel}

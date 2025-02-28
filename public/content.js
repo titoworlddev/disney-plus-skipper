@@ -174,7 +174,7 @@
           }, 1000 * 8);
         }
       }, 500);
-      console.log('Search started');
+      console.error('Search started');
     }
   };
 
@@ -182,7 +182,7 @@
     if (intervalId !== null) {
       clearInterval(intervalId);
       intervalId = null;
-      console.log('Search stopped');
+      console.error('Search stopped');
     }
   };
 
